@@ -1,5 +1,6 @@
 package org.ga4gh.drs.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -43,6 +44,10 @@ public class DrsObject {
     private String name;
 
     private String version;
+
+    public DrsObject() {
+        
+    }
 
     public DrsObject(String id, URI selfURI, List<Checksum> checksums, LocalDateTime createdTime, long size) {
         this.setId(id);
