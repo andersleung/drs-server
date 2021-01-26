@@ -28,6 +28,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -151,7 +153,11 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     @Scope(value = AppConfigConstants.PROTOTYPE)
     public HttpsDrsObjectLoader HttpsDrsObjectLoader(String objectId, String objectPath) {
-        return new HttpsDrsObjectLoader(objectId, objectPath);
+        try {
+            return new HttpsDrsObjectLoader(objectId, objectPath);
+        } catch (MalformedURLException e) {
+            return null;
+        }
     }
 
     /* ******************************
