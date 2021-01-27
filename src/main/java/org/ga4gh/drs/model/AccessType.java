@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 @JsonNaming(PropertyNamingStrategy.LowerCaseStrategy.class)
 public enum AccessType {
     // TODO: incorporate other data source schemes, for now only https, and file
-    // S3,
+     S3,
     // GS,
     // FTP,
     // GSIFTP,

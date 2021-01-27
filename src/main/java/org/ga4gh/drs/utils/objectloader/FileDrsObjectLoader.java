@@ -79,7 +79,7 @@ public class FileDrsObjectLoader extends AbstractDrsObjectLoader {
         return checksums;
     }
 
-    public int imputeSize() {
+    public long imputeSize() {
         return (int)getFile().length();
     }
 

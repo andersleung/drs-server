@@ -2,9 +2,7 @@ package org.ga4gh.drs.utils.objectloader;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -66,15 +64,13 @@ public class HttpsDrsObjectLoader extends AbstractDrsObjectLoader {
         return null;
     }
 
-    public int imputeSize() {
+    public long imputeSize() {
         try {
             HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.connect();
-            int responseCode = conn.getResponseCode();
-            // TODO: possibly handling HTTPS -> HTTP redirecting?
             return conn.getContentLength();
         } catch (IOException e) {
-            return false;
+            return 0;
         }
     }
 

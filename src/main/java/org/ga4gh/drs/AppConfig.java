@@ -15,6 +15,7 @@ import org.ga4gh.drs.utils.DeepObjectMerger;
 import org.ga4gh.drs.utils.objectloader.DrsObjectLoaderFactory;
 import org.ga4gh.drs.utils.objectloader.FileDrsObjectLoader;
 import org.ga4gh.drs.utils.objectloader.HttpsDrsObjectLoader;
+import org.ga4gh.drs.utils.objectloader.S3DrsObjectLoader;
 import org.ga4gh.drs.utils.requesthandler.ObjectRequestHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import software.amazon.awssdk.services.s3.S3Client;
 
 
 @Configuration
@@ -160,6 +162,12 @@ public class AppConfig implements WebMvcConfigurer {
         }
     }
 
+    @Bean
+    @Scope(value = AppConfigConstants.PROTOTYPE)
+    public S3DrsObjectLoader S3DrsObjectLoader(String objectId, String objectPath) {
+        return null;
+    }
+
     /* ******************************
      * OTHER UTILS BEANS
      * ****************************** */
@@ -172,5 +180,10 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public DrsObjectLoaderFactory drsObjectLoaderFactory() {
         return new DrsObjectLoaderFactory();
+    }
+
+    @Bean
+    public S3Client s3Client() {
+        return S3Client.builder().build();
     }
 }

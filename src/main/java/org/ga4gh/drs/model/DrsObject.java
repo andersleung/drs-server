@@ -1,6 +1,5 @@
 package org.ga4gh.drs.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -26,7 +25,7 @@ public class DrsObject {
     @NonNull
     private LocalDateTime createdTime;
 
-    private int size;
+    private long size;
 
     // Optional
     private List<AccessMethod> accessMethods;
@@ -89,11 +88,11 @@ public class DrsObject {
         this.createdTime = createdTime;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 

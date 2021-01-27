@@ -4,8 +4,6 @@ import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 import org.ga4gh.drs.App;
 import org.ga4gh.drs.AppConfig;
@@ -233,7 +231,7 @@ public class FileDrsObjectLoaderTest extends AbstractTestNGSpringContextTests {
 
     @Test(dataProvider = "imputeSizeCases")
     public void testImputeSize(String objectId, String objectPath, int expSize) {
-        int size = factory.createDrsObjectLoader(AccessType.FILE, objectId, objectPath).imputeSize();
+        long size = factory.createDrsObjectLoader(AccessType.FILE, objectId, objectPath).imputeSize();
         Assert.assertEquals(size, expSize);
     }
 

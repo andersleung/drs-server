@@ -20,6 +20,8 @@ public class DrsObjectLoaderFactory implements ApplicationContextAware {
                 return context.getBean(FileDrsObjectLoader.class, objectId, objectPath);
             case HTTPS:
                 return context.getBean(HttpsDrsObjectLoader.class, objectId, objectPath);
+            case S3:
+                return context.getBean(S3DrsObjectLoader.class, objectId, objectPath);
             default:
                 throw new ResourceNotFoundException();
         }
