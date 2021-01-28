@@ -12,6 +12,7 @@ import org.ga4gh.drs.constant.ServiceInfoDefaults;
 import org.ga4gh.drs.model.ServiceInfo;
 import org.ga4gh.drs.utils.DataSourceLookup;
 import org.ga4gh.drs.utils.DeepObjectMerger;
+import org.ga4gh.drs.utils.S3ClientRegionBasedProvider;
 import org.ga4gh.drs.utils.objectloader.DrsObjectLoaderFactory;
 import org.ga4gh.drs.utils.objectloader.FileDrsObjectLoader;
 import org.ga4gh.drs.utils.objectloader.HttpsDrsObjectLoader;
@@ -26,16 +27,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
 
@@ -165,7 +169,11 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     @Scope(value = AppConfigConstants.PROTOTYPE)
     public S3DrsObjectLoader S3DrsObjectLoader(String objectId, String objectPath) {
-        return null;
+        try {
+            return new S3DrsObjectLoader(objectId, objectPath);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /* ******************************
@@ -180,10 +188,5 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public DrsObjectLoaderFactory drsObjectLoaderFactory() {
         return new DrsObjectLoaderFactory();
-    }
-
-    @Bean
-    public S3Client s3Client() {
-        return S3Client.builder().build();
     }
 }

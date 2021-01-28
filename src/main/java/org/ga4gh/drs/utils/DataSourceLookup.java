@@ -78,7 +78,6 @@ public class DataSourceLookup {
 
     private AbstractDrsObjectLoader newDrsObjectLoader(DataSource source, String objectId, String objectPath) {
         AccessType accessType = source.getProtocol();
-        AbstractDrsObjectLoader drsObjectLoader = drsObjectLoaderFactory.createDrsObjectLoader(accessType, objectId, objectPath);
-        return drsObjectLoader;
+        return drsObjectLoaderFactory.createDrsObjectLoader(accessType, objectId, objectPath);
     }
 }

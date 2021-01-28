@@ -230,7 +230,7 @@ public class FileDrsObjectLoaderTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "imputeSizeCases")
-    public void testImputeSize(String objectId, String objectPath, int expSize) {
+    public void testImputeSize(String objectId, String objectPath, long expSize) {
         long size = factory.createDrsObjectLoader(AccessType.FILE, objectId, objectPath).imputeSize();
         Assert.assertEquals(size, expSize);
     }
@@ -262,7 +262,7 @@ public class FileDrsObjectLoaderTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test(dataProvider = "generateDrsObjectCases")
-    public void testGenerateDrsObject(String objectId, String objectPath, String expId, URI expSelfURI, int expSize, String expName, String expMimeType) {
+    public void testGenerateDrsObject(String objectId, String objectPath, String expId, URI expSelfURI, long expSize, String expName, String expMimeType) {
         DrsObject drsObject = factory.createDrsObjectLoader(AccessType.FILE, objectId, objectPath).generateDrsObject();
         Assert.assertEquals(drsObject.getId(), expId);
         Assert.assertEquals(drsObject.getSelfURI(), expSelfURI);
