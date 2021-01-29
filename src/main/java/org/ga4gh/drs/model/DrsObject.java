@@ -2,9 +2,12 @@ package org.ga4gh.drs.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.lang.NonNull;
-
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +26,9 @@ public class DrsObject {
     private List<Checksum> checksums;
 
     @NonNull
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime createdTime;
 
     private long size;
@@ -34,6 +40,9 @@ public class DrsObject {
 
     private List<ContentsObject> contents;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime updatedTime;
 
     private String description;
@@ -48,7 +57,7 @@ public class DrsObject {
         
     }
 
-    public DrsObject(String id, URI selfURI, List<Checksum> checksums, LocalDateTime createdTime, int size) {
+    public DrsObject(String id, URI selfURI, List<Checksum> checksums, LocalDateTime createdTime, long size) {
         this.setId(id);
         this.setSelfURI(selfURI);
         this.setChecksums(checksums);

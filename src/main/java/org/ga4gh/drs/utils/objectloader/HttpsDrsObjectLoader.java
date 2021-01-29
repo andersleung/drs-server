@@ -65,13 +65,8 @@ public class HttpsDrsObjectLoader extends AbstractDrsObjectLoader {
     }
 
     public long imputeSize() {
-        try {
-            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-            conn.connect();
-            return conn.getContentLength();
-        } catch (IOException e) {
-            return 0;
-        }
+        // TODO fill out stub method
+        return 0;
     }
 
     public String imputeName() {
